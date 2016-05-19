@@ -42,6 +42,7 @@ typedef double Flt;
 #define vs vector<SBSI*>
 #define string SBSI
 #define echo cout <<
+#define rope vector
 
 //Structure to hold components of the SBSI furmula.
 //h    height;
@@ -55,7 +56,7 @@ struct string {
 	Flt vtc;
     Flt expected;
 };
-vector<string*>* format_data(double[][5]);
+rope<string*>* format_data(double[][5]);
 void test(vs*);
 double test_values[][5] = {{157, 	79, 	163, 	15906, 	0.102431072},
 {157, 	79, 	163, 	18074, 	0.102144331},
