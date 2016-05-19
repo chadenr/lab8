@@ -39,24 +39,22 @@ using namespace std;
 //Define floating-point standard
 typedef double Flt;
 
-#define vs vector<SBSI*>
-#define string SBSI
-#define echo cout <<
+#define _S SBSI*
 
 //Structure to hold components of the SBSI furmula.
 //h    height;
 //wc   waist circumference;
 //bsa  body surface area;
 //vtc  vertical trunk circumference;
-struct string {
+struct SBSI {
 	Flt h;
 	Flt wc;
 	Flt bsa;
 	Flt vtc;
     Flt expected;
 };
-vector<string*>* format_data(double[][5]);
-void test(vs*);
+vector<SBSI*>* format_data(double[][5]);
+void test(vector<SBSI*> *);
 double test_values[][5] = {{157, 	79, 	163, 	15906, 	0.102431072},
 {157, 	79, 	163, 	18074, 	0.102144331},
 {157, 	79, 	163, 	20242, 	0.080489509},
@@ -141,28 +139,28 @@ double test_values[][5] = {{157, 	79, 	163, 	15906, 	0.102431072},
 {0,     0,      0,      0 ,     0}}; //sentinal
 
 
-Flt bodyShapeIndex(string *sbsi);
-void test(vs* data, Flt tolerance = 0.005){
+Flt bodyShapeIndex(SBSI *sbsi);
+void test(vector<SBSI*> * data, Flt tolerance = 0.005){
     Flt y_actual;
-    echo "H\t\tWC\t\tBSA\t\tSBSI\t\t"
+    cout << "H\t\tWC\t\tBSA\t\tSBSI\t\t"
         //<< "Expected\t\t"
         << "Function\n"
         <<  "---\t\t---\t\t-----\t\t---\t\t-----"
         << endl;
-        for(vs::iterator i = data->begin();
+        for(vector<SBSI*>::iterator i = data->begin();
         i != data->end();
         i++
     ){
         y_actual = bodyShapeIndex(*i);
-        echo (*i)->h << "\t\t";
-        echo (*i)->wc << "\t\t";
-        echo (*i)->bsa << "\t\t";
-        echo (*i)->vtc << "\t\t";
-        //echo (*i)->expected << "\t\t";
-        echo y_actual << "\t";
+        cout << (*i)->h << "\t\t";
+        cout << (*i)->wc << "\t\t";
+        cout << (*i)->bsa << "\t\t";
+        cout << (*i)->vtc << "\t\t";
+        //cout << (*i)->expected << "\t\t";
+        cout << y_actual << "\t";
         if(abs(y_actual - (*i)->expected) > tolerance)
-            echo "<----- outside of tolerance";
-        echo endl;
+            cout << "<----- outside of tolerance";
+        cout << endl;
     }
 
     return;
@@ -172,7 +170,7 @@ int main(int argc, char *argv[])
 	SBSI sbsi;
     if(argc > 1){
         //running a unit test.
-        vector<string*>* data;
+        vector<SBSI*>* data;
         data = format_data(test_values);       
         Flt tolerance;
         if(argc > 2){
@@ -225,9 +223,9 @@ Flt bodyShapeIndex(SBSI *sbsi)
 	return ret;
 }
 //SBSI has members h, wc, bsa and vtc.
-vs* format_data(double data[][5])
+vector<SBSI*>* format_data(double data[][5])
 {
-    static vs output;
+    static vector<SBSI*> output;
     
     for(int i = 0; 
             data[i][0] != 0
@@ -236,7 +234,7 @@ vs* format_data(double data[][5])
             || data[i][3] != 0
             || data[i][4] != 0; 
             i++){      
-        string* tmp = new SBSI;
+        SBSI* tmp = new SBSI;
         tmp->h = data[i][0];
         tmp->wc = data[i][1];
         tmp->bsa = data[i][2];
